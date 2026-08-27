@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+:root{
+    --forest-900:#0E3A20;
+    --forest-800:#134F2D;
+    --forest-700:#1B6238;
+    --forest-600:#227448;
+    --teal-500:#41957D;
+    --teal-400:#5CAE97;
+    --teal-100:#DEEFE8;
+    --teal-50:#EEF7F3;
+    --cream:#F9FAF4;
+    --white:#FFFFFF;
+    --ink:#152219;
+    --ink-soft:#3B4A40;
+    --gray-500:#6E7A72;
+    --gray-300:#B7C2BA;
+    --border:#E4E8DF;
+    --amber:#C9862E;
+    --red:#C4453A;
+    --shadow: 0 1px 2px rgba(15,40,25,0.04), 0 6px 20px rgba(15,40,25,0.06);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 9px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.jakarta{ font-family:'Plus Jakarta Sans', sans-serif; }
+  a{ text-decoration:none; color:inherit; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  .screen{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* LEFT PANEL */
+  .brand-panel{
+    background: radial-gradient(circle at 15% 15%, var(--forest-600) 0%, var(--forest-800) 45%, var(--forest-900) 100%);
+    color:#fff;
+    padding:52px 56px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position:relative;
+    overflow:hidden;
+  }
+  .brand-panel::before{
+    content:"";
+    position:absolute; right:-120px; bottom:-120px;
+    width:360px; height:360px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  }
+  .brand-row{ display:flex; align-items:center; gap:12px; position:relative; z-index:1;}
+  .brand-row img{ width:44px; height:44px; object-fit:contain; border-radius:9px; background:#fff; padding:3px; }
+  .brand-row .name{ font-size:18px; font-weight:800; letter-spacing:0.2px; }
+  .brand-row .tag{ font-size:10.5px; color:var(--teal-400); font-weight:700; letter-spacing:1.3px; text-transform:uppercase; margin-top:2px; }
+
+  .panel-mid{ position:relative; z-index:1; max-width:400px; }
+  .panel-mid h2{ font-size:30px; font-weight:800; line-height:1.25; margin-bottom:14px; }
+  .panel-mid p{ font-size:14.5px; color:rgba(255,255,255,0.72); line-height:1.6; }
+
+  /* signature band-scale illustration */
+  .band-illustration{ margin-top:34px; }
+  .band-illustration .ruler-track{ position:relative; height:10px; background:rgba(255,255,255,0.12); border-radius:6px; }
+  .band-illustration .ruler-fill{ position:absolute; left:0; top:0; height:100%; border-radius:6px; background:linear-gradient(90deg, var(--teal-400), #fff); width:72%; }
+  .band-illustration .ruler-ticks{ display:flex; justify-content:space-between; margin-top:8px; }
+  .band-illustration .ruler-ticks span{ font-size:10px; font-weight:600; color:rgba(255,255,255,0.4); width:12px; text-align:center; }
+  .band-illustration .cap{ font-size:11.5px; color:rgba(255,255,255,0.55); margin-top:10px; }
+  .band-illustration .cap b{ color:#fff; }
+
+  .quote-block{
+    position:relative; z-index:1;
+    border-top:1px solid rgba(255,255,255,0.14);
+    padding-top:20px;
+  }
+  .quote-block p{ font-size:13.5px; color:rgba(255,255,255,0.75); line-height:1.6; font-style:italic; }
+  .quote-block .who{ margin-top:10px; font-size:12.5px; font-weight:700; color:var(--teal-400); font-style:normal; }
+
+  /* RIGHT PANEL */
+  .form-panel{
+    display:flex; align-items:center; justify-content:center;
+    padding:40px 32px;
+  }
+  .form-box{ width:100%; max-width:400px; }
+  .form-box .mobile-brand{ display:none; }
+  .form-box h1{ font-size:26px; font-weight:800; margin-bottom:8px; }
+  .form-box .sub{ font-size:14px; color:var(--gray-500); margin-bottom:32px; }
+
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12.5px; font-weight:700; color:var(--ink-soft); margin-bottom:7px; }
+  .input-wrap{ position:relative; }
+  .input-wrap input{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid var(--border);
+    border-radius:var(--radius-sm);
+    font-size:14px;
+    font-family:inherit;
+    color:var(--ink);
+    background:var(--white);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .input-wrap input::placeholder{ color:var(--gray-300); }
+  .input-wrap input:focus{
+    outline:none;
+    border-color:var(--teal-500);
+    box-shadow:0 0 0 3px var(--teal-50);
+  }
+  .input-wrap .toggle-eye{
+    position:absolute; right:12px; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:var(--gray-500); padding:2px;
+    display:flex; align-items:center;
+  }
+  .input-wrap .toggle-eye svg{ width:18px; height:18px; }
+
+  .field-error{ font-size:11.5px; color:var(--red); margin-top:6px; display:none; }
+  .field.has-error input{ border-color:var(--red); }
+  .field.has-error .field-error{ display:block; }
+
+  .row-between{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .remember{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft); }
+  .remember input{ width:16px; height:16px; accent-color:var(--forest-700); }
+  .forgot{ font-size:13px; font-weight:700; color:var(--teal-500); }
+  .forgot:hover{ text-decoration:underline; }
+
+  .btn-primary{
+    width:100%;
+    background:var(--forest-800);
+    color:#fff;
+    font-size:14.5px; font-weight:700;
+    padding:13px 0;
+    border-radius:var(--radius-sm);
+    border:none;
+    transition:background .15s;
+  }
+  .btn-primary:hover{ background:var(--forest-700); }
+
+  .switch-line{ text-align:center; font-size:13.5px; color:var(--gray-500); margin-top:4px; }
+  .switch-line a{ color:var(--forest-700); font-weight:700; }
+  .switch-line a:hover{ text-decoration:underline; }
+
+  .trust-row{ display:flex; align-items:center; gap:8px; margin-top:28px; justify-content:center; }
+  .trust-row svg{ width:14px; height:14px; color:var(--teal-500); }
+  .trust-row span{ font-size:11.5px; color:var(--gray-500); }
+
+  @media (max-width:920px){
+    .screen{ grid-template-columns:1fr; }
+    .brand-panel{ display:none; }
+    .form-box .mobile-brand{
+      display:flex; align-items:center; gap:10px; margin-bottom:30px;
+    }
+    .form-box .mobile-brand img{ width:38px; height:38px; border-radius:8px; }
+    .form-box .mobile-brand .name{ font-family:'Plus Jakarta Sans'; font-weight:800; font-size:16px; color:var(--forest-800); }
+  }
