@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
@@ -68,5 +69,39 @@ class CustomUserDetailsServiceTest {
 
         assertThrows(UsernameNotFoundException.class,
                 () -> service.loadUserByUsername("ghost@example.com"));
+    }
+
+    @Test
+    void loadUserByUsername_activeStatus_returnsEnabledUserDetailsWithRoleAuthority() {
+        User user = new User();
+        user.setEmail("active@example.com");
+        user.setPasswordHash("hashed");
+        user.setRole("Student");
+        user.setStatus("Active");
+
+        when(userRepository.findByEmail("active@example.com")).thenReturn(Optional.of(user));
+
+        UserDetails details = service.loadUserByUsername("active@example.com");
+
+        assertTrue(details.isEnabled());
+        assertTrue(details.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_STUDENT")));
+    }
+
+    @Test
+    void loadUserByUsername_suspendedStatus_returnsDisabledUserDetailsWithRoleAuthority() {
+        User user = new User();
+        user.setEmail("suspended@example.com");
+        user.setPasswordHash("hashed");
+        user.setRole("Student");
+        user.setStatus("Suspended");
+
+        when(userRepository.findByEmail("suspended@example.com")).thenReturn(Optional.of(user));
+
+        UserDetails details = service.loadUserByUsername("suspended@example.com");
+
+        assertFalse(details.isEnabled());
+        assertTrue(details.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_STUDENT")));
     }
 }

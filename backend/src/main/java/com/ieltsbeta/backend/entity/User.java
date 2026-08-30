@@ -30,6 +30,9 @@ public class User {
     @Column(name = "role", nullable = false, length = 20)
     private String role;
 
+    @Column(name = "status", nullable = false, length = 20)
+    private String status = "Active";
+
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
 
@@ -74,6 +77,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public OffsetDateTime getCreatedAt() {

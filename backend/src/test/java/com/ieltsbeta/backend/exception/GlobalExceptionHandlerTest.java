@@ -61,6 +61,28 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
+    void handleUserNotFound_returnsNotFoundWithMessage() {
+        UserNotFoundException ex = new UserNotFoundException("No user found with ID: 42");
+
+        ResponseEntity<Map<String, Object>> response = handler.handleUserNotFound(ex);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("No user found with ID: 42", response.getBody().get("message"));
+        assertEquals(404, response.getBody().get("status"));
+    }
+
+    @Test
+    void handleAdminSelfAction_returnsBadRequestWithMessage() {
+        AdminSelfActionException ex = new AdminSelfActionException("Admins cannot delete their own account");
+
+        ResponseEntity<Map<String, Object>> response = handler.handleAdminSelfAction(ex);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Admins cannot delete their own account", response.getBody().get("message"));
+        assertEquals(400, response.getBody().get("status"));
+    }
+
+    @Test
     void allHandledResponses_includeErrorReasonPhrase() {
         ResponseEntity<Map<String, Object>> response =
                 handler.handleDuplicateEmail(new DuplicateEmailException("x"));

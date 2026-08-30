@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -240,6 +241,26 @@ class AuthServiceTest {
         MockHttpServletRequest httpRequest = new MockHttpServletRequest();
 
         assertThrows(InvalidCredentialsException.class, () -> authService.login(request, httpRequest));
+    }
+
+    @Test
+    void login_suspendedAccount_throwsInvalidCredentialsExceptionWithGenericMessage() {
+        // CustomUserDetailsService marks a suspended account's UserDetails
+        // as disabled; AuthenticationManager then throws DisabledException.
+        // AuthService must translate that into the same generic message as
+        // a wrong password, rather than revealing the account is suspended.
+        LoginRequest request = new LoginRequest();
+        request.setEmail("suspended@example.com");
+        request.setPassword("correct-password");
+
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenThrow(new DisabledException("account disabled"));
+
+        MockHttpServletRequest httpRequest = new MockHttpServletRequest();
+
+        InvalidCredentialsException exception = assertThrows(InvalidCredentialsException.class,
+                () -> authService.login(request, httpRequest));
+        assertEquals("Invalid email or password", exception.getMessage());
     }
 
     @Test

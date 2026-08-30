@@ -13,6 +13,7 @@ import com.ieltsbeta.backend.exception.InvalidRegistrationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -143,6 +144,13 @@ public class AuthService {
                     )
             );
         } catch (BadCredentialsException e) {
+            throw new InvalidCredentialsException("Invalid email or password");
+        } catch (DisabledException e) {
+            // Thrown by AuthenticationManager when CustomUserDetailsService
+            // returns a disabled UserDetails (status != "Active"). Reuses
+            // the same generic message as bad credentials, so a suspended
+            // account is not distinguishable from a wrong password to the
+            // client.
             throw new InvalidCredentialsException("Invalid email or password");
         }
 
