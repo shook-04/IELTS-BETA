@@ -91,7 +91,7 @@ Full write-up with UML diagrams: [`DESIGN_PATTERNS.md`](https://github.com/shook
 
 ## Testing
 
-The backend has 117 unit tests (JUnit 5 + Mockito), with coverage measured by JaCoCo.
+The backend has 116 unit tests (JUnit 5 + Mockito), with coverage measured by JaCoCo.
 
 Full write-up with coverage results: [`TESTING.md`](https://github.com/shook-04/IELTS-BETA/blob/main/backend/src/test/java/com/ieltsbeta/backend/TESTING.md)
 
@@ -135,7 +135,7 @@ Full write-up with coverage results: [`TESTING.md`](https://github.com/shook-04/
 cd backend
 # create src/main/resources/application.properties with your DB credentials
 # (this file is gitignored — it isn't in the repo)
-./mvnw spring-boot:run
+mvn clean spring-boot:run
 ```
 Runs on `http://localhost:8080`.
 
