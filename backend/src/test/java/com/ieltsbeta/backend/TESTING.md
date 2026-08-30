@@ -1,9 +1,6 @@
 # Testing — IELTS-BETA
 
-Repo: https://github.com/shook-04/IELTS-BETA
 Module: `backend` (Spring Boot, Java 21)
-
----
 
 ## Testing Framework
 
@@ -36,7 +33,7 @@ Every unit is tested in isolation with its collaborators mocked (`@Mock` + `@Ext
 | Controller | `controller/TestControllerTest.java` | 6 | test-listing and submission endpoints via standalone `MockMvc`, `TestSubmissionFacade` mocked |
 | Context load | `BackendApplicationTests.java` | 1 | Spring context loads |
 
-**117 test methods across 16 test classes.**
+**116 test methods across 16 test classes.**
 
 ---
 
@@ -62,29 +59,22 @@ Every unit is tested in isolation with its collaborators mocked (`@Mock` + `@Ext
 | `com.ieltsbeta.backend.pattern.factory` | 100% | 100% | 100% | 1 |
 | **Total** | **83%** (511/3,060 missed) | **90%** (8/88 missed) | **~79.7%** (199/978 missed) | 55 |
 
-Backend logic specifically — services (82% instr / 94% branch), controllers (95% instr / 83% branch), and the pattern/business-logic packages (facade, strategy, adapter, observer, factory — all 98–100%) — comfortably clears the 50% line/branch target. `dto` (63%) and the application root (37%) sit lower since those packages are mostly getters/setters and the `main()` bootstrap, which carry little branching logic to test.
+Services, controllers, and all five pattern packages are at 82–100% coverage — well above the 50% target. `dto` (63%) and the application root (37%) are lower, but those are just getters/setters and the `main()` bootstrap, with little logic to test.
 
 **How to generate the coverage report:**
 ```bash
 cd backend
-./mvnw test
+mvn clean test
+start .\target\site\jacoco\index.html
 ```
-JaCoCo runs automatically as part of `test` (already bound in `pom.xml`) and writes:
-- HTML report: `backend/target/site/jacoco/index.html`
-- Raw exec data: `backend/target/jacoco.exec`
-
-Open `index.html` in a browser for the per-class/per-package breakdown, or run:
-```bash
-./mvnw jacoco:report
-```
-to regenerate the report without re-running tests.
-
+`clean` clears out any stale `target/` output, `test` runs the suite and — since `prepare-agent` and `report` are already bound in `pom.xml` — generates the JaCoCo report as part of the same run. `start` (Windows) then opens the HTML report in the default browser for the per-class/per-package breakdown.
+ 
 ---
-
+ 
 ## Running the Tests
-
+ 
 ```bash
 cd backend
-./mvnw test          # run the full suite (117 tests) + generate coverage
+./mvnw test          # run the full suite (116 tests) + generate coverage
 ./mvnw -Dtest=AuthServiceTest test   # run a single test class
 ```
