@@ -71,8 +71,6 @@ IELTS-BETA/
 
 ![IELTS Beta ERD](docs/erd.png)
 
-📎 [Click here to view the full ERD](docs/erd.png)
-
 ---
 
 ## Database Schema
@@ -100,33 +98,34 @@ Full write-up with coverage results: [`TESTING.md`](https://github.com/shook-04/
 ---
 
 ## Screenshots
-
-*(add each screenshot to `docs/screenshots/` using the filenames below)*
-
+ 
+**Landing**
+![Landing Page](docs/screenshots/landing-page.png)
+ 
 **Auth**
 | Login | Registration |
 |---|---|
 | ![Login](docs/screenshots/login.png) | ![Registration](docs/screenshots/registration.png) |
-
+ 
 **Student**
-| Dashboard | Courses | Course Detail |
-|---|---|---|
-| ![Student Dashboard](docs/screenshots/student-dashboard.png) | ![Student Courses](docs/screenshots/student-courses.png) | ![Course Detail](docs/screenshots/student-course-detail.png) |
-
-| Tests | Progress |
+| Dashboard | Courses |
 |---|---|
-| ![Student Tests](docs/screenshots/student-tests.png) | ![Student Progress](docs/screenshots/student-progress.png) |
-
+| ![Student Dashboard](docs/screenshots/student-dashboard.png) | ![Student Courses](docs/screenshots/student-courses.png) |
+ 
+| Practice Test | Progress |
+|---|---|
+| ![Student Practice Test](docs/screenshots/student-practice-test.png) | ![Student Progress](docs/screenshots/student-progress.png) |
+ 
 **Teacher**
 | Dashboard |
 |---|
 | ![Teacher Dashboard](docs/screenshots/teacher-dashboard.png) |
-
+ 
 **Admin**
 | Dashboard | Users |
 |---|---|
 | ![Admin Dashboard](docs/screenshots/admin-dashboard.png) | ![Admin Users](docs/screenshots/admin-users.png) |
-
+ 
 ---
 
 ## Getting Started
